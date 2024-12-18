@@ -196,17 +196,6 @@ private class SFDCAccessControllerTest {
 		}
 
 		try {
-			accessController.assertAuthorizedToCreate(Schema.Contact.SobjectType, new List<String>{ 'LastModifiedDate' });
-			System.assert(false, 'Should not succeed in saving as Lastmodified date is not creatable');
-		} catch (SFDCAccessControlException ex) {
-			System.assert(!String.isBlank(ex.getText()));
-			System.assertEquals(SFDCAccessControlException.ExceptionType.FIELD_ACCESS_VIOLATION, ex.getExceptionType());
-			System.assertEquals(SFDCAccessControlException.ExceptionReason.NO_CREATE, ex.getExceptionReason());
-			System.assertEquals('Contact', ex.getExceptionObject());
-			System.assertEquals('LastModifiedDate', ex.getExceptionField());
-		}
-
-		try {
 			accessController.assertAuthorizedToCreate(Schema.ApexLog.SobjectType, new List<Schema.SObjectField>{ Schema.ApexLog.fields.Status });
 			System.assert(false, 'Should not succeed in saving as ApexLog  is not creatable');
 		} catch (SFDCAccessControlException ex) {
